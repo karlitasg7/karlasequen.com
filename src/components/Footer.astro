@@ -1,17 +1,18 @@
 ---
-const getYear = () => new Date().getFullYear().toString();
+const currentYear = new Date().getFullYear();
 ---
 
 <footer
-  class="flex justify-center items-center bg-transparent py-4"
+  class="opacity-80 m-4 mt-16 w-full mx-auto container lg:max-w-4xl md:max-w-2xl mb-10 flex justify-center"
 >
-  <p class="flex items-center text-center font-light text-sm text-secondary">
-    &copy; {getYear()} developed by
-    <a target="_blank" class="link ml-1" href="https://github.com/mmouzo">Martín Mouzo Silva</a>
-  </p>
-  <img
-    class="rounded-full w-4 h-4 ml-2 shadow-md border border-black"
-    src="gl_flag_128x.png"
-    alt="Galician Flag"
-  />
+  <div
+    class="rounded-lg w-full max-w-screen-xl mx-auto md:flex md:items-center md:justify-between py-4"
+  >
+    <span class="text-sm sm:text-center text-zinc-800/90 dark:text-zinc-200/90"
+      >© {currentYear}
+      <a href="https://www.karlitasg7.com/" class="hover:underline"
+        >karlitasg7</a
+      >. All rights reserved.
+    </span>
+  </div>
 </footer>

@@ -1,0 +1,146 @@
+---
+import GitHub from "./icons/GitHub.astro";
+import NextJS from "./icons/NextJS.astro";
+import Tailwind from "./icons/Tailwind.astro";
+import Link from "./icons/Link.astro";
+import Java from "./icons/Java.astro";
+import Angular from "./icons/Angular.astro";
+import JavaScript from "./icons/JavaScript.astro";
+import React from "./icons/React.astro";
+import Spring from "./icons/Spring.astro";
+import Html from "./icons/Html.astro";
+import Css from "./icons/Css.astro";
+import LinkButton from "./LinkButton.astro";
+
+const TAGS = {
+  NEXT: {
+    name: "Next.js",
+    class: "bg-black text-white",
+    icon: NextJS,
+  },
+  TAILWIND: {
+    name: "Tailwind CSS",
+    class: "bg-[#003159] text-white",
+    icon: Tailwind,
+  },
+  JAVA: {
+    name: "Java",
+    class: "bg-white text-black",
+    icon: Java,
+  },
+  ANGULAR: {
+    name: "Angular",
+    class: "bg-white text-black",
+    icon: Angular,
+  },
+  REACT: {
+    name: "React",
+    class: "bg-[#61DAFB] text-black",
+    icon: React,
+  },
+  SPRING: {
+    name: "Spring",
+    class: "bg-white text-black",
+    icon: Spring,
+  },
+  JAVASCRIPT: {
+    name: "JavaScript",
+    class: "bg-[#F7DF1E] text-black",
+    icon: JavaScript,
+  },
+  HTML: {
+    name: "HTML",
+    class: "bg-[#E34F26] text-white",
+    icon: Html,
+  },
+  CSS: {
+    name: "CSS",
+    class: "bg-[#E34F26] text-white",
+    icon: Css,
+  },
+};
+const PROJECTS = [
+  {
+    title: "Adventure Project",
+    description:
+      "This project is a CRUD for employees using the database Adventure Works, including the API and Web application",
+    github: "https://github.com/karlitasg7/AdventureProject",
+    tags: [TAGS.JAVA, TAGS.ANGULAR],
+  },
+  {
+    title: "Todo App",
+    description: "A Todo App to learn React.",
+    link: "https://karlasequen.com/todoapp/",
+    github: "https://github.com/karlitasg7/react-todo-app",
+    tags: [TAGS.REACT],
+  },
+  {
+    title: "Payments Project",
+    description:
+      "This project is a test using microservices, implementing Eureka Server, Config Server, API Gateway, Docker.",
+    github: "https://github.com/karlitasg7/PaymentsProject",
+    tags: [TAGS.JAVA, TAGS.SPRING],
+  },
+  {
+    title: "Platzi Travel",
+    description:
+      "This project is a simple landing page to test and learn Tailwind",
+    link: "https://www.karlasequen.com/PlatziTravel/",
+    github: "https://github.com/karlitasg7/PlatziTravel",
+    tags: [TAGS.TAILWIND, TAGS.HTML],
+  },
+  {
+    title: "Advent Of Code",
+    description:
+      "This project is my solutions to Advent Of Code and Advent Of Code JS",
+    github: "https://github.com/karlitasg7/AdventOfCode",
+    tags: [TAGS.JAVA, TAGS.JAVASCRIPT],
+  },
+];
+---
+
+<div class="flex flex-col gap-y-16">
+  {
+    PROJECTS.map(({ title, description, tags, link, github }) => (
+      <article class="flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0">
+        <div class="w-full md:w-1/2 md:max-w-lg">
+          <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">
+            {title}
+          </h3>
+          <div class="flex flex-col mt-2">
+            <ul class="flex flex-row mb-2 gap-x-2">
+              {tags.map((tag) => (
+                <li>
+                  <span
+                    class={`flex gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2 `}
+                  >
+                    {tag.icon && <tag.icon class="size-4" />}
+                    {tag.name}
+                  </span>
+                </li>
+              ))}
+            </ul>
+
+            <div class="mt-2 text-gray-700 dark:text-gray-400">
+              {description}
+            </div>
+            <footer class="flex items-end justify-start mt-4 gap-x-4">
+              {github && (
+                <LinkButton href={github}>
+                  <GitHub class="size-6" />
+                  Code
+                </LinkButton>
+              )}
+              {link && (
+                <LinkButton href={link}>
+                  <Link class="size-4" />
+                  Preview
+                </LinkButton>
+              )}
+            </footer>
+          </div>
+        </div>
+      </article>
+    ))
+  }
+</div>

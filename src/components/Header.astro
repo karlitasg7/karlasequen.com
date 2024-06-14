@@ -1,53 +1,108 @@
 ---
-import { Icon } from "astro-icon/components";
-import * as about from "../pages/about/about.md";
+import ThemeToggle from "./ThemeToggle.astro";
+
+const navItems = [
+  {
+    title: "Experience",
+    label: "experience",
+    url: "/#experience",
+  },
+  {
+    title: "Projects",
+    label: "projects",
+    url: "/#projects",
+  },
+  {
+    title: "About Me",
+    label: "about-me",
+    url: "/#about-me",
+  },
+  // {
+  //   title: "Education",
+  //   label: "education",
+  //   url: "/#education",
+  // },
+  {
+    title: "Contact",
+    label: "contact",
+    url: "mailto:hi@karlasequen.com",
+  },
+];
 ---
 
-<header class="mx-auto pt-6 pb-2 relative">
-  <article
-    class="flex flex-col md:flex-col items-center gap-4 w-full max-w-2xl"
+<header
+  class="fixed top-0 z-10 flex items-center justify-center w-full mx-auto mt-2"
+>
+  <nav
+    class="flex px-3 text-sm font-medium rounded-full text-gray-600 dark:text-gray-200 justify-center items-center"
   >
-    <div
-      class="flex-shrink-0 w-20 md:w-24 rounded-full shadow-sm overflow-hidden"
-    >
-      <img
-        alt="avatar"
-        src="/profile.webp"
-        class="grayscale-[50] hover:grayscale-0"
-      />
-    </div>
-
-    <div class="text-center">
-      <div
-        class="flex justify-center md:justify-between items-center mb-2 relative"
-      >
-        <h1 class="text-3xl font-extrabold tracking-tight md:text-3xl relative">
-          {about.frontmatter.name}
-          <div class="absolute top-0 left-full ml-2 -mt-4">
-            <div class="badge w-max text-sm font-light badge-outline shadow-lg">
-              {about.frontmatter.pronouns}
-            </div>
-          </div>
-        </h1>
-      </div>
-      <h2 class="text-lg mb-2 text-secondary">
-        {about.frontmatter.designation}
-      </h2>
-      <div class="flex items-center justify-center mt-1">
-        <Icon name="carbon:location" class="w-4 h-4 mr-1" />
-        <p class="text-sm text-secondary">{about.frontmatter.location}</p>
-      </div>
-    </div>
-  </article>
+    {
+      navItems.map((link) => (
+        <a
+          class="relative block px-2 py-2 transition hover:text-yellow-500 dark:hover:text-yellow-400"
+          aria-label={link.label}
+          href={link.url}
+        >
+          {link.title}
+        </a>
+      ))
+    }
+    <ThemeToggle />
+  </nav>
 </header>
 
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const sections = document.querySelectorAll("section");
+    const navItems = document.querySelectorAll("header nav a");
+
+    const callback = (entries: any[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          navItems.forEach((item) => {
+            if (item.getAttribute("aria-label") == entry.target.id) {
+              item.classList.add("text-yellow-500");
+            } else {
+              item.classList.remove("text-yellow-500");
+            }
+          });
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(callback, {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.3,
+    });
+
+    sections.forEach((section) => {
+      observer.observe(section);
+    });
+
+    // Cleanup function
+    document.onvisibilitychange = () => {
+      if (document.visibilityState === "hidden") {
+        observer.disconnect();
+      } else {
+        sections.forEach((section) => {
+          observer.observe(section);
+        });
+      }
+    };
+  });
+</script>
+
 <style>
-  @media (max-width: 768px) {
-    .flex-col.justify-end {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+  nav {
+    animation: nav-shadown 1s linear both;
+    animation-timeline: scroll();
+    animation-range: 0 100px;
+  }
+
+  @keyframes nav-shadown {
+    to {
+      @apply shadow-lg ring-1 backdrop-blur dark:bg-gray-800/90 bg-white/50 ring-white/10;
     }
   }
 </style>
