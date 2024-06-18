@@ -1,0 +1,73 @@
+---
+import EducationItem from './EducationItem.astro'
+
+const EDUCATION = [
+	{
+		type: '',
+		items: [
+			{
+				name: 'Engineer’s degree, Information Technology',
+				institution: 'Universidad Mariano Galvez de Guatemala',
+				date: 'April 2014',
+			},
+		],
+	},
+	{
+		type: 'Certifications',
+		items: [
+			{
+				name: 'AZ 900, Azure Fundamentals',
+				institution: 'Microsoft',
+				date: '2022',
+				link: 'https://www.credly.com/badges/4966805b-47f0-419a-b067-dede229c43ac',
+			},
+			{
+				name: 'Scrum Foundation',
+				institution: 'CertiProf',
+				date: '2022',
+				credential: '73756906',
+				link: 'https://www.credly.com/badges/7cf597be-800e-45fe-b61a-896c30e9adf9',
+			},
+			{
+				name: 'Full Stack Observability Practitioner Exam',
+				institution: 'New Relic, Inc.',
+				date: '2022',
+				credential: '53502376',
+				link: 'https://www.credential.net/94ccd70d-b035-4fbe-8fd2-1cd4af64873e',
+			},
+		],
+	},
+	{
+		type: 'Courses',
+		items: [
+			{
+				name: 'Data Structures + Algorithms',
+				institution: 'Zero To Mastery in Udemy',
+				date: 'July 2022',
+				credential: 'UC-28ce59e9-1179-4af3-876b-57f44bacf25d',
+				link: 'https://www.udemy.com/certificate/UC-28ce59e9-1179-4af3-876b-57f44bacf25d',
+			},
+			{
+				name: 'Automation con Selenium y Java',
+				institution: 'Cool Testers',
+				date: 'April 2021',
+				credential: '2104SESAMR07',
+				link: '/files/CoolTesters_AutomationSeleniumJava.pdf',
+			},
+		],
+	},
+]
+---
+
+{
+	EDUCATION.map((education) => (
+		<ol class="relative mt-16">
+			<h2 className="text-2xl font-bold mb-4">{education.type}</h2>
+			{education.items.map((item, index) => (
+				<li class="">
+					<EducationItem {...item} />
+				</li>
+			))}
+		</ol>
+	))
+}
