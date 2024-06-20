@@ -61,13 +61,11 @@ const EDUCATION = [
 
 {
 	EDUCATION.map((education) => (
-		<ol class="relative mt-16">
+		<>
 			<h2 className="text-2xl font-bold mb-4">{education.type}</h2>
 			{education.items.map((item, index) => (
-				<li class="">
-					<EducationItem {...item} />
-				</li>
+				<EducationItem {...item} />
 			))}
-		</ol>
+		</>
 	))
 }
